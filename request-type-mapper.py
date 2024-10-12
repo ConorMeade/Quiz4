@@ -12,4 +12,4 @@ def mapper():
             # ensure we actually have data
             if len(request) > 0:
                 method = request[0]
-                # print(f"{method}\t1")
+                print(f"{method}\t1")
