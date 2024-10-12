@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import collections
 
 request_count = {}
 
@@ -14,25 +13,15 @@ for line in sys.stdin:
         # count was not a number, so silently
         # ignore/discard this line
         continue
+    if method not in request_count:
+        request_count[method] = 0
 
-    if method in request_count:
-        request_count[method].update({'ct':count})
-    else:
-        request_count[method] = collections.Counter()
-        request_count[method].update({'ct':count})
+    request_count[method] += count
 
-    # if method not in request_count:
-    #     request_count[method] = 0
-
-    # request_count[method] += count
-
-    # print(request_count)
-    total_reqs = 0
-    for m, c in request_count.items():
-        total_reqs += c['ct']
+total_reqs = sum(request_count.values())
 
 for method, count in request_count.items():
-    percentage_of_reqs = (count['ct'] / total_reqs) * 100
+    percentage_of_reqs = (count / total_reqs) * 100
     print(f"{method}\t{percentage_of_reqs:.2f}%")
 
 # """reducer.py"""
