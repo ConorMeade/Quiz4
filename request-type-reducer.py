@@ -6,7 +6,7 @@ request_count = {}
 
 
 for line in sys.stdin:
-    method, count = line.strip().split('\t', 1)
+    method, count = line.strip().split(' ', 1)
     try:
         count  = int(count)
     except ValueError:
