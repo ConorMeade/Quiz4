@@ -4,9 +4,8 @@ import sys
 
 request_count = {}
 
-total_reqs = 0
+
 for line in sys.stdin:
-    total_reqs += 1
     method, count = line.strip().split('\t', 1)
     try:
         count  = int(count)
@@ -14,17 +13,17 @@ for line in sys.stdin:
         # count was not a number, so silently
         # ignore/discard this line
         continue
-    if method not in request_count.keys():
-        request_count[method] = count
-    else:
-        request_count[method] += int(count)
+    if method not in request_count:
+        request_count[method] = 0
+
+    request_count[method] += count
+
+total_reqs = sum(request_count.values())
 
 for method, count in request_count.items():
     percentage_of_reqs = (count / total_reqs) * 100
     print(f"{method}\t{percentage_of_reqs:.2f}%")
 
-
-#     #!/usr/bin/env python
 # """reducer.py"""
 
 # from operator import itemgetter
