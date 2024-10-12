@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import sys
-
+import re
 
 # def main(argv):
 #     line = sys.stdin.readline()
@@ -20,21 +20,13 @@ import sys
 
 def main(argv):
     line = sys.stdin.readline()
+    pattern = re.compile(r'\"(\w+)\s')
     try:
-        # for line in sys.stdin:
-        while line:
-            # split on opening parens, second element will be the request type
-            log_elems = line.split('"')
-            if len(log_elems) > 1:
-                # print(log_elems)
-                # break
-                # after date time portion, we have the GET, POST, PUT etc. message
-                request = log_elems[1].split()  # ['GET', '/index.php?option=com_phocagallery&view=category&id=1:almhuette-raith&Itemid=53', 'HTTP/1.1']
-                # ensure we actually have data
-                if len(request) > 0:
-                    method = request[0]
-                    print(f"{method}\t1")
-        line = sys.stdin.readline()
+        for line in sys.stdin:
+            match = pattern.search(line)
+            if match:
+                method = match.group(1)  # Extract the request method (e.g., GET, POST)
+                print(f"{method}\t1")
                 
 
     except EOFError as error:
