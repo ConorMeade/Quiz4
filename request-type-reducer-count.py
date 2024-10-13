@@ -20,4 +20,4 @@ for line in sys.stdin:
     request_count[method] += count
 
 for method, count in request_count.items():
-    print(f"{method}\t{count}%")
+    print(f"{method}\t{count}")
