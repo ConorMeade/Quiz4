@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+
+'''request-type-mapper.py'''
 import sys
 import re
 

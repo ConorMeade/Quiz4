@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''reducer_percentage.py'''
+'''request-type-reducer-percentage.py'''
 import sys
 
 request_percentages = {}

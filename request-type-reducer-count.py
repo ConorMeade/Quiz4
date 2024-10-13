@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''reducer_count.py'''
+'''request-type-reducer-count.py'''
 import sys
 
 request_count = {}
