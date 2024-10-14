@@ -12,7 +12,7 @@ def main(argv):
             match = pattern.findall(line)
             if match:
                 ip = match[0] # Extract the request method (e.g., GET, POST, HEAD)
-                print(f"{ip}\t1")
+                print(f"LongValueSum:{ip}\t1")
             line = sys.stdin.readline()
                 
     except EOFError as error:
