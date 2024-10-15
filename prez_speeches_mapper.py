@@ -37,10 +37,6 @@ def calc_valence(text):
     v = []
     if isinstance(text, bytes):
         text = text.decode('utf-8')
-    # no_stop_words = remove_stopwords(text)
-    # filter_sentence = []
-    # for f in no_stop_words:
-    #     filter_sentence.append(clean_text(f))
     text_list = text.split(' ')
     for w in text_list:
         if w in valence_dict:
@@ -73,8 +69,7 @@ def main(argv):
     # for input in sys.stdin:
     #     # print(input)
     #     process_tar_file(input.strip())
-    president_name = 'foo'
-    # file_name = os.getenv("mapreduce_map_input_file")
+    president_name = 'missing prez name'
     # # file_name = "fdroosevelt_speeches_000.txt"
     name_pattern = r'^(.*?)_'
     # # print(file_name)
@@ -91,7 +86,7 @@ def main(argv):
             # fetch president name
             clean_line = clean_text(line) # returns a line as a space-seperated line, or a sentence if you will
             president_file_name = os.environ['mapreduce_map_input_file']
-            match = re.match(name_pattern, president_file_name)
+            match = re.match(name_pattern, president_file_name.strip())
             if match:
                 president_name = match.group(1)
             valence_vals = valence(clean_line)

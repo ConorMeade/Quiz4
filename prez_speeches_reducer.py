@@ -10,7 +10,8 @@ num_words = 0
 president_name = 'missing name'
 for line in sys.stdin:
 # with open('adams.txt', 'r') as c:
-    president_name, valence_score = line.strip().split('\t', 1)
+    line = line.strip()
+    president_name, valence_score = line.split('\t', 1)
     try:
         valence_score  = int(valence_score)
         total_valence_score += valence_score
