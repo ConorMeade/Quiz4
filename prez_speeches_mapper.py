@@ -40,7 +40,7 @@ def calc_valence(text, president_name):
         filter_sentence.append(clean_text(f))
     for w in filter_sentence:
         if w in valence_dict:
-            print(f'{president_name}\t{valence_dict[w]}')
+            print(f"{president_name}\t{valence_dict[w]}")
 
 
 def process_tar_file(f):
@@ -53,18 +53,11 @@ def process_tar_file(f):
                 speech_file = tar.extractfile(member)
                 if speech_file is not None:
                     for line in speech_file:
-                        valence(line.decode('utf-8'), president_name)
-                        # clean_line = clean_text(line.decode('utf-8'))
-
-                        # clean_line_list = clean_line.split(' ')
-                        # for word in clean_line_list:
-                        #     if word in valence_dict:
-                                # print(f'{president_name}\t{valence_dict[word]}')s
-
+                        valence(line.decode('utf-8').strip(), president_name)
 
 def main(argv):
     for input in sys.stdin:
-        process_tar_file(input)
+        process_tar_file(input.strip())
 
 
 if __name__ == "__main__":
