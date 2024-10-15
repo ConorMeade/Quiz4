@@ -41,24 +41,32 @@ def calc_valence(text, president_name):
     for w in filter_sentence:
         if w in valence_dict:
             print(f"{president_name}\t{valence_dict[w]}")
-
+            # print(f"{president_name}\t a")
 
 def process_tar_file(f):
-    with tarfile.open(fileobj=f, mode="r:gz") as tar:
+    # with tarfile.open(fileobj=f, mode="r:gz") as tar:
+    with tarfile.open(f, mode="r:gz") as tar:
         for member in tar.getmembers():
             if member.isfile():
                 file_name = member.name
                 name_pattern = r'^(.*?)/'
-                president_name = re.search(name_pattern ,file_name).group(1)
+                president_name = re.search(name_pattern, file_name).group(1)
                 speech_file = tar.extractfile(member)
                 if speech_file is not None:
                     for line in speech_file:
                         valence(line.decode('utf-8').strip(), president_name)
 
-def main(argv):
+    # return valence_vals
+
+# def main(argv):
+def main():
     for input in sys.stdin:
         process_tar_file(input.strip())
+    # valence_vals = 0
+    # process_tar_file("adams.tar.gz")
+    # for president, valence in valence_vals.items():
+        # print(f"{president}\t{valence}")
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
