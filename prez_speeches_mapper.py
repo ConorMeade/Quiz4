@@ -6,6 +6,7 @@ import sys
 import re
 import requests
 import string
+import os
 import tarfile
 
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
@@ -51,23 +52,40 @@ def process_tar_file(f):
                 if member.isfile():
                     file_name = member.name
                     name_pattern = r'^(.*?)/'
-                    president_name = re.search(name_pattern, file_name).group(1)
+                    president_name = re.match(name_pattern, file_name).group(1)
                     speech_file = tar.extractfile(member)
                     if speech_file is not None:
                         for line in speech_file:
                             valence(line.decode('utf-8').strip(), president_name)
-    if '.txt' in f:
-        line = sys.stdin.readline()
-        while line:
-            valence(line.decode('utf-8').strip(), 'carter')
-            line = sys.stdin.readline()
+    else:
+        pass
     # return valence_vals
 
 # def main(argv):
 def main(argv):
-    for input in sys.stdin:
-        # print(input)
-        process_tar_file(input.strip())
+    # for input in sys.stdin:
+    #     # print(input)
+    #     process_tar_file(input.strip())
+    president_name = 'foo'
+    file_name = os.getenv("mapreduce_map_input_file")
+    # file_name = "fdroosevelt_speeches_000.txt"
+    name_pattern = r'^(.*?)_'
+    # print(file_name)
+    match = re.match(name_pattern, file_name)
+    if match:
+        president_name = match.group(1)
+        # print(president_name)
+    line = sys.stdin.readline()
+
+  
+
+    try:
+        while line:
+            valence(line, president_name)
+        line = sys.stdin.readline()
+    except EOFError as error:
+        return None
+            
     # valence_vals = 0
     # process_tar_file("adams.tar.gz")
     # for president, valence in valence_vals.items():
