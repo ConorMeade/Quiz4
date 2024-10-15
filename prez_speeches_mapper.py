@@ -34,6 +34,8 @@ def valence(text, president_name):
     return calc_valence(text, president_name)
 
 def calc_valence(text, president_name):
+    if isinstance(text, bytes):
+        text = text.decode('utf-8')
     no_stop_words = remove_stopwords(text)
     filter_sentence = []
     for f in no_stop_words:
