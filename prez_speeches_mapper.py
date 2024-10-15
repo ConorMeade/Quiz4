@@ -68,7 +68,7 @@ def main(argv):
     president_name = 'foo'
     # file_name = os.getenv("mapreduce_map_input_file")
     # # file_name = "fdroosevelt_speeches_000.txt"
-    # name_pattern = r'^(.*?)_'
+    name_pattern = r'^(.*?)_'
     # # print(file_name)
     # match = re.match(name_pattern, file_name)
     # if match:
@@ -78,12 +78,13 @@ def main(argv):
 
     # fetch president name
     # <president name>/speeches as txt files
-
-
     try:
         while line:
-            if os.path.isdir(line.strip()):
-                president_name = line.strip()
+            # fetch president name
+            president_file_name = os.environ['mapreduce_map_input_file']
+            match = re.match(name_pattern, president_file_name)
+            if match:
+                president_name = match.group(1)
             valence(line, president_name)
         line = sys.stdin.readline()
     except EOFError as error:
