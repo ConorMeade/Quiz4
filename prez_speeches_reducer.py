@@ -20,7 +20,6 @@ with open('adams.txt', 'r') as c:
             valence_aggregate[president_name] = 0
 
         valence_aggregate[president_name] += valence_score
-
         
         if president_name not in valence_words_ct:
             valence_words_ct[president_name] = 0
