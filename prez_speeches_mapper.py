@@ -94,7 +94,7 @@ def main(argv):
                 president_name = match.group(1)
             valence_vals = valence(line)
             for v in valence_vals:
-                (f"{president_name}\t{v}")
+                print(f"{president_name}\t{v}")
         line = sys.stdin.readline()
     except EOFError as error:
         return None
