@@ -40,8 +40,7 @@ def calc_valence(text, president_name):
         filter_sentence.append(clean_text(f))
     for w in filter_sentence:
         if w in valence_dict:
-            pass
-            # print(f"{president_name}\t{valence_dict[w]}")
+            print(f"{president_name}\t{valence_dict[w]}")
             # print(f"{president_name}\t a")
 
 def process_tar_file(f):
@@ -67,20 +66,24 @@ def main(argv):
     #     # print(input)
     #     process_tar_file(input.strip())
     president_name = 'foo'
-    file_name = os.getenv("mapreduce_map_input_file")
-    # file_name = "fdroosevelt_speeches_000.txt"
-    name_pattern = r'^(.*?)_'
-    # print(file_name)
-    match = re.match(name_pattern, file_name)
-    if match:
-        president_name = match.group(1)
+    # file_name = os.getenv("mapreduce_map_input_file")
+    # # file_name = "fdroosevelt_speeches_000.txt"
+    # name_pattern = r'^(.*?)_'
+    # # print(file_name)
+    # match = re.match(name_pattern, file_name)
+    # if match:
+    #     president_name = match.group(1)
         # print(president_name)
     line = sys.stdin.readline()
 
-  
+    # fetch president name
+    # <president name>/speeches as txt files
+
 
     try:
         while line:
+            if os.path.isdir(line.strip()):
+                president_name = line.strip()
             valence(line, president_name)
         line = sys.stdin.readline()
     except EOFError as error:
