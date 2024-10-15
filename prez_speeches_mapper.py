@@ -30,10 +30,11 @@ def clean_text(text):
     text = re.sub('[\d\n]', ' ', text)
     return ' '.join(remove_stopwords(text))
 
-def valence(text, president_name):
-    return calc_valence(text, president_name)
+def valence(text):
+    return calc_valence(text)
 
-def calc_valence(text, president_name):
+def calc_valence(text):
+    v = []
     if isinstance(text, bytes):
         text = text.decode('utf-8')
     no_stop_words = remove_stopwords(text)
@@ -42,8 +43,11 @@ def calc_valence(text, president_name):
         filter_sentence.append(clean_text(f))
     for w in filter_sentence:
         if w in valence_dict:
-            print(f"{president_name}\t{valence_dict[w]}")
+            v.append(valence_dict[w])
+            # print(f"{president_name}\t{valence_dict[w]}")
             # print(f"{president_name}\t a")
+
+    return v
 
 def process_tar_file(f):
     # with tarfile.open(fileobj=f, mode="r:gz") as tar:
@@ -87,7 +91,9 @@ def main(argv):
             match = re.match(name_pattern, president_file_name)
             if match:
                 president_name = match.group(1)
-            valence(line, president_name)
+            valence_vals = valence(line)
+            for v in valence_vals:
+                (f"{president_name}\t{v}")
         line = sys.stdin.readline()
     except EOFError as error:
         return None
