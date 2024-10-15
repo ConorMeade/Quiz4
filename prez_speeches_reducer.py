@@ -26,7 +26,7 @@ for line in sys.stdin:
     valence_words_ct[president_name] += 1
 
 for name, total_valence_words in valence_words_ct.items():
-    print(f"{name}\t{total_valence_words}")
+    print(f"{name}\ttotal\t{total_valence_words}")
 
 for name, net_v_score in valence_aggregate.items():
-    print(f"{name}\ttotal\t{net_v_score}")
+    print(f"{name}\t{net_v_score}")
