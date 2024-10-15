@@ -38,11 +38,11 @@ def calc_valence(text):
     if isinstance(text, bytes):
         text = text.decode('utf-8')
     no_stop_words = remove_stopwords(text)
-    filter_sentence = []
-    for f in no_stop_words:
-        filter_sentence.append(clean_text(f))
-    for w in filter_sentence:
-        if w in valence_dict:
+    # filter_sentence = []
+    # for f in no_stop_words:
+    #     filter_sentence.append(clean_text(f))
+    for w in no_stop_words:
+        if clean_text(w) in valence_dict:
             v.append(valence_dict[w])
             # print(f"{president_name}\t{valence_dict[w]}")
             # print(f"{president_name}\t a")
