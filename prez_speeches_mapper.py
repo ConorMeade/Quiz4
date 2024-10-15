@@ -6,7 +6,6 @@ import sys
 import re
 import requests
 import string
-import io
 import tarfile
 
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
@@ -40,27 +39,34 @@ def calc_valence(text, president_name):
         filter_sentence.append(clean_text(f))
     for w in filter_sentence:
         if w in valence_dict:
-            print(f"{president_name}\t{valence_dict[w]}")
+            pass
+            # print(f"{president_name}\t{valence_dict[w]}")
             # print(f"{president_name}\t a")
 
 def process_tar_file(f):
     # with tarfile.open(fileobj=f, mode="r:gz") as tar:
-    with tarfile.open(f, mode="r:gz") as tar:
-        for member in tar.getmembers():
-            if member.isfile():
-                file_name = member.name
-                name_pattern = r'^(.*?)/'
-                president_name = re.search(name_pattern, file_name).group(1)
-                speech_file = tar.extractfile(member)
-                if speech_file is not None:
-                    for line in speech_file:
-                        valence(line.decode('utf-8').strip(), president_name)
-
+    if '.tar' in f:
+        with tarfile.open(f, mode="r:gz") as tar:
+            for member in tar.getmembers():
+                if member.isfile():
+                    file_name = member.name
+                    name_pattern = r'^(.*?)/'
+                    president_name = re.search(name_pattern, file_name).group(1)
+                    speech_file = tar.extractfile(member)
+                    if speech_file is not None:
+                        for line in speech_file:
+                            valence(line.decode('utf-8').strip(), president_name)
+    if '.txt' in f:
+        line = sys.stdin.readline()
+        while line:
+            valence(line.decode('utf-8').strip(), 'carter')
+            line = sys.stdin.readline()
     # return valence_vals
 
 # def main(argv):
-def main():
+def main(argv):
     for input in sys.stdin:
+        # print(input)
         process_tar_file(input.strip())
     # valence_vals = 0
     # process_tar_file("adams.tar.gz")
@@ -69,4 +75,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
