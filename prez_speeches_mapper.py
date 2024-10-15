@@ -37,12 +37,13 @@ def calc_valence(text):
     v = []
     if isinstance(text, bytes):
         text = text.decode('utf-8')
-    no_stop_words = remove_stopwords(text)
+    # no_stop_words = remove_stopwords(text)
     # filter_sentence = []
     # for f in no_stop_words:
     #     filter_sentence.append(clean_text(f))
-    for w in no_stop_words:
-        if clean_text(w) in valence_dict:
+    text_list = text.split(' ')
+    for w in text_list:
+        if w in valence_dict:
             v.append(valence_dict[w])
             # print(f"{president_name}\t{valence_dict[w]}")
             # print(f"{president_name}\t a")
@@ -88,11 +89,12 @@ def main(argv):
     try:
         while line:
             # fetch president name
+            clean_line = clean_text(line) # returns a line as a space-seperated line, or a sentence if you will
             president_file_name = os.environ['mapreduce_map_input_file']
             match = re.match(name_pattern, president_file_name)
             if match:
                 president_name = match.group(1)
-            valence_vals = valence(line)
+            valence_vals = valence(clean_line)
             for v in valence_vals:
                 print(f"{president_name}\t{v}")
         line = sys.stdin.readline()
