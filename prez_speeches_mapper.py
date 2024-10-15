@@ -7,7 +7,7 @@ import re
 import requests
 import string
 import os
-import tarfile
+# import tarfile
 
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
 stopwords = list(set(stopwords_list.decode().splitlines()))
@@ -49,25 +49,26 @@ def calc_valence(text):
 
     return v
 
-def process_tar_file(f):
-    # with tarfile.open(fileobj=f, mode="r:gz") as tar:
-    if '.tar' in f:
-        with tarfile.open(f, mode="r:gz") as tar:
-            for member in tar.getmembers():
-                if member.isfile():
-                    file_name = member.name
-                    name_pattern = r'^(.*?)/'
-                    president_name = re.match(name_pattern, file_name).group(1)
-                    speech_file = tar.extractfile(member)
-                    if speech_file is not None:
-                        for line in speech_file:
-                            valence(line.decode('utf-8').strip(), president_name)
-    else:
-        pass
+# def process_tar_file(f):
+#     # with tarfile.open(fileobj=f, mode="r:gz") as tar:
+#     if '.tar' in f:
+#         with tarfile.open(f, mode="r:gz") as tar:
+#             for member in tar.getmembers():
+#                 if member.isfile():
+#                     file_name = member.name
+#                     name_pattern = r'^(.*?)/'
+#                     president_name = re.match(name_pattern, file_name).group(1)
+#                     speech_file = tar.extractfile(member)
+#                     if speech_file is not None:
+#                         for line in speech_file:
+#                             valence(line.decode('utf-8').strip(), president_name)
+#     else:
+#         pass
     # return valence_vals
 
 # def main(argv):
 def main(argv):
+    # print(valence_dict)
     # for input in sys.stdin:
     #     # print(input)
     #     process_tar_file(input.strip())
@@ -97,12 +98,6 @@ def main(argv):
         line = sys.stdin.readline()
     except EOFError as error:
         return None
-            
-    # valence_vals = 0
-    # process_tar_file("adams.tar.gz")
-    # for president, valence in valence_vals.items():
-        # print(f"{president}\t{valence}")
-
 
 if __name__ == "__main__":
     main(sys.argv)
