@@ -31,4 +31,4 @@ with open('adams.txt', 'r') as c:
         print(f"{name}\t{total_valence_words}")
 
     for name, net_v_score in valence_aggregate.items():
-        print(f"{name}\t{net_v_score}")
+        print(f"{name}\ttotal\t{net_v_score}")
