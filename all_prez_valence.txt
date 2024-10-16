@@ -1,0 +1,86 @@
+adams   total   1055
+arthur  total   2617
+bharrison       total   4385
+buchanan        total   4789
+bush    total   6313
+carter  total   6224
+cleveland       total   9332
+clinton     total   10126
+coolidge        total   4491
+eisenhower      total   1551
+fdroosevelt     total   8915
+fillmore        total   2174
+ford    total   2873
+garfield        total   252
+grant   total   5683
+gwbush  total   9522
+harding total   2239
+harrison        total   507
+hayes   total   3869
+hoover  total   5528
+jackson total   8880
+jefferson       total   2220
+johnson total   5635
+jqadams total   1965
+kennedy total   10799
+lbjohnson       total   16317
+lincoln total   5642
+madison total   2461
+mckinley        total   5713
+monroe  total   2945
+nixon   total   4673
+obama   total   14446
+pierce  total   3593
+polk    total   6114
+reagan  total   14321
+roosevelt       total   12180
+taft    total   6118
+taylor  total   627
+truman  total   2890
+tyler   total   3756
+vanburen        total   3654
+washington      total   2134
+wilson  total   5057
+adams   611
+arthur    1516
+bharrison        2370
+buchanan        994
+bush    2874
+carter   2346
+cleveland  4324
+clinton 3904
+coolidge        3397
+eisenhower      1090
+fdroosevelt     2221
+fillmore        1212
+ford    1762
+garfield        101
+grant   3185
+gwbush  2748
+harding  862
+harrison        287
+hayes   2621
+hoover  2099
+jackson 4358
+jefferson   1158
+johnson 1414
+jqadams 1588
+kennedy 5175
+lbjohnson       7497
+lincoln -352
+madison 1255
+mckinley        3571
+monroe  2443
+nixon   1716
+obama   7333
+pierce  1711
+polk    2302
+reagan  5882
+roosevelt       3757
+taft    4077
+taylor  538
+truman  1415
+tyler   1913
+vanburen        1794
+washington      1463
+wilson  2515
