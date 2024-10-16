@@ -47,18 +47,14 @@ def calc_valence(text):
 # def main(argv):
 def main(argv):
     president_name = 'missing prez name'
-    name_pattern = r'^(.*?)_'
     line = sys.stdin.readline()
     try:
         while line:
             clean_line = clean_text(line) # returns a line as a space-seperated line, or a sentence if you will
             # fetch president name
             if "mapreduce_map_input_file" in os.environ:
-                president_name = os.environ['mapreduce_map_input_file']
-
-                # match = re.match(name_pattern, president_file_name.strip())
-                # if match:
-                #     president_name = match.group(1)
+                president_file_name = os.environ['mapreduce_map_input_file']
+                president_name = re.sub(r'.*/|_speeches_\d+\.txt$', '', president_file_name)
             valence_vals = valence(clean_line)
             for v in valence_vals:
                 print(f"{president_name}\t{v}")
