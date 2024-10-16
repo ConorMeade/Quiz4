@@ -7,9 +7,9 @@ import random
 def main(argv):
     line = sys.stdin.readline()
     pattern = re.compile("[a-zA-Z][a-zA-Z0-9]*")
-    x = 1 / random.randint(0,99)
     try:
         while line:
+            x = 1 / random.randint(0,99)
             for word in pattern.findall(line):
                 print ("LongValueSum:" + word.lower() + "\t" + "1")
                 # x = 1 / random.randint(0,99)
