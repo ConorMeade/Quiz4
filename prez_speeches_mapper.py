@@ -7,7 +7,6 @@ import re
 import requests
 import string
 import os
-# import tarfile
 
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
 stopwords = list(set(stopwords_list.decode().splitlines()))
@@ -45,40 +44,17 @@ def calc_valence(text):
 
     return v
 
-# def process_tar_file(f):
-#     # with tarfile.open(fileobj=f, mode="r:gz") as tar:
-#     if '.tar' in f:
-#         with tarfile.open(f, mode="r:gz") as tar:
-#             for member in tar.getmembers():
-#                 if member.isfile():
-#                     file_name = member.name
-#                     name_pattern = r'^(.*?)/'
-#                     president_name = re.match(name_pattern, file_name).group(1)
-#                     speech_file = tar.extractfile(member)
-#                     if speech_file is not None:
-#                         for line in speech_file:
-#                             valence(line.decode('utf-8').strip(), president_name)
-#     else:
-#         pass
-    # return valence_vals
-
 # def main(argv):
 def main(argv):
     president_name = 'missing prez name'
-    # # file_name = "fdroosevelt_speeches_000.txt"
     name_pattern = r'^(.*?)_'
-    # # print(file_name)
-    # match = re.match(name_pattern, file_name)
-    # if match:
-    #     president_name = match.group(1)
-        # print(president_name)
     line = sys.stdin.readline()
     try:
         while line:
             clean_line = clean_text(line) # returns a line as a space-seperated line, or a sentence if you will
             # fetch president name
-            if "map_input_file" in os.environ:
-                president_file_name = os.environ['map_input_file']
+            if "mapreduce_map_input_file" in os.environ:
+                president_file_name = os.environ['mapreduce_map_input_file']
                 match = re.match(name_pattern, president_file_name.strip())
                 if match:
                     president_name = match.group(1)
