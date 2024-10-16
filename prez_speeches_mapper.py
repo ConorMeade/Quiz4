@@ -42,7 +42,6 @@ def calc_valence(text):
         if w in valence_dict:
             v.append(valence_dict[w])
             # print(f"{president_name}\t{valence_dict[w]}")
-            # print(f"{president_name}\t a")
 
     return v
 
@@ -65,10 +64,6 @@ def calc_valence(text):
 
 # def main(argv):
 def main(argv):
-    # print(valence_dict)
-    # for input in sys.stdin:
-    #     # print(input)
-    #     process_tar_file(input.strip())
     president_name = 'missing prez name'
     # # file_name = "fdroosevelt_speeches_000.txt"
     name_pattern = r'^(.*?)_'
@@ -78,9 +73,6 @@ def main(argv):
     #     president_name = match.group(1)
         # print(president_name)
     line = sys.stdin.readline()
-
-    # fetch president name
-    # <president name>/speeches as txt files
     try:
         while line:
             # fetch president name
@@ -92,7 +84,7 @@ def main(argv):
             valence_vals = valence(clean_line)
             for v in valence_vals:
                 print(f"{president_name}\t{v}")
-        line = sys.stdin.readline()
+            line = sys.stdin.readline()
     except EOFError as error:
         return None
 
