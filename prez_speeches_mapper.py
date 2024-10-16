@@ -75,12 +75,13 @@ def main(argv):
     line = sys.stdin.readline()
     try:
         while line:
-            # fetch president name
             clean_line = clean_text(line) # returns a line as a space-seperated line, or a sentence if you will
-            president_file_name = os.environ['mapreduce_map_input_file']
-            match = re.match(name_pattern, president_file_name.strip())
-            if match:
-                president_name = match.group(1)
+            # fetch president name
+            if "map_input_file" in os.environ:
+                president_file_name = os.environ['map_input_file']
+                match = re.match(name_pattern, president_file_name.strip())
+                if match:
+                    president_name = match.group(1)
             valence_vals = valence(clean_line)
             for v in valence_vals:
                 print(f"{president_name}\t{v}")
