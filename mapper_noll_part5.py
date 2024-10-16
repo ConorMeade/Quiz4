@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+
+'''mapper_noll_part5.py'''
 import sys, re
 import random
 
 def main(argv):
     line = sys.stdin.readline()
     pattern = re.compile("[a-zA-Z][a-zA-Z0-9]*")
-
     x = 1 / random.randint(0,99)
     try:
         while line:
