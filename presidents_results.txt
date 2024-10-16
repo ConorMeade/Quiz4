@@ -1,0 +1,8 @@
+harrison        507
+harrison        total   287
+adams           645
+adams           total   1523
+grant           5683
+grant           total   3185
+polk            6114
+polk            total   2302
