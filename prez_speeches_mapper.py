@@ -54,10 +54,11 @@ def main(argv):
             clean_line = clean_text(line) # returns a line as a space-seperated line, or a sentence if you will
             # fetch president name
             if "mapreduce_map_input_file" in os.environ:
-                president_file_name = os.environ['mapreduce_map_input_file']
-                match = re.match(name_pattern, president_file_name.strip())
-                if match:
-                    president_name = match.group(1)
+                president_name = os.environ['mapreduce_map_input_file']
+
+                # match = re.match(name_pattern, president_file_name.strip())
+                # if match:
+                #     president_name = match.group(1)
             valence_vals = valence(clean_line)
             for v in valence_vals:
                 print(f"{president_name}\t{v}")
